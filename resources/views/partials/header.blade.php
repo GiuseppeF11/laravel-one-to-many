@@ -11,6 +11,9 @@
                 <div class="mx-2 p-2 ">
                     <a class="link-hover nav-links" href="{{ route('admin.projects.index') }}">Home</a>
                 </div>
+                <div class="mx-2 p-2 ">
+                    <a class="link-hover nav-links" href="{{ route('admin.types.index') }}">Categories</a>
+                </div>
             </div>
             <div class="col d-flex justify-content-around  align-items-center py-2">
                 <p class="text-light">Welcome {{ auth()->user()->name }}!</p>

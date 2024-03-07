@@ -16,6 +16,7 @@
                     <tr>
                         <th scope="col">Id</th>
                         <th scope="col">Project Name</th>
+                        <th scope="col">Tipo</th>
                         <th scope="col">link</th>
                         <th scope="col">Description</th>
                         <th scope="col">Creation Date</th>
@@ -28,6 +29,15 @@
                         <tr>
                             <th scope="row">{{ $project->id }}</th>
                             <td>{{ $project->title }}</td>
+                            <td>
+                                @if ($project->type != null)
+                                    <a href="{{ route('admin.types.show', ['type' => $project->type->id]) }}">
+                                        {{ $project->type->title }}
+                                    </a>
+                                @else
+                                    -
+                                @endif
+                            </td>
                             <td><a
                                     href="{{ route('admin.projects.show', ['project' => $project->id]) }}">{{ $project->url }}</a>
                             </td>
@@ -53,7 +63,6 @@
                 </tbody>
             </table>
         </div>
-
     @endsection
 
 <style lang="scss" scoped>

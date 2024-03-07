@@ -23,6 +23,10 @@
                     <li>
                         Data creazione: {{ $project->created_at->format('d/m/Y - H:i') }}
                     </li>
+
+                    <li>
+                        {{ $project->type->title }}
+                    </li>
                 </ul>
                 <p>
                     {{ $project->description }}
