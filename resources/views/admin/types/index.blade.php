@@ -1,18 +1,18 @@
 @extends('layouts.app')
 
-@section('page-title', 'Tutte i tipi')
+@section('page-title', 'Tutti i tipi')
 
 @section('main-content')
     <div class="row">
         <div class="col">
             <div class="card">
                 <div class="card-body">
-                    <h1 class="text-center text-success">
+                    <h1 class="text-center">
                         Tutti i tipi
                     </h1>
 
                     <div class="mb-3">
-                        <a href="{{ route('admin.types.create') }}" class="btn btn-success w-100">
+                        <a href="{{ route('admin.types.create') }}" class="btn btn-info w-100">
                             + Aggiungi
                         </a>
                     </div>

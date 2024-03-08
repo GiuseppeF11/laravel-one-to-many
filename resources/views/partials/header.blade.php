@@ -12,14 +12,16 @@
                     <a class="link-hover nav-links" href="{{ route('admin.projects.index') }}">Home</a>
                 </div>
                 <div class="mx-2 p-2 ">
-                    <a class="link-hover nav-links" href="{{ route('admin.types.index') }}">Categories</a>
+                    <a class="link-hover nav-links" href="{{ route('admin.types.index') }}">Tipi</a>
                 </div>
             </div>
-            <div class="col d-flex justify-content-around  align-items-center py-2">
-                <p class="text-light">Welcome {{ auth()->user()->name }}!</p>
+            <div class="col d-flex justify-content-end align-items-center py-2">
+                <span class="text-light mx-3">Welcome {{ auth()->user()->name }}!</span>
+            </div>
+            <div class="col">
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-                    <button type="submit" class="btn btn-outline-info">
+                    <button type="submit" class="btn btn-outline-info mx-3">
                         Log Out
                     </button>
                 </form>
@@ -45,5 +47,4 @@
     .link-hover:hover {
         color: white;
     }
-
 </style>

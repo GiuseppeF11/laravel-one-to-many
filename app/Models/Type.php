@@ -14,11 +14,11 @@ class Type extends Model
         'slug'
     ];
 
-    /*
-        Relationships
+    /* 
+        Definisco la relazione 1 a *
     */
     public function projects()
     {
-        return $this->hasMany(Project::class);
+        return $this->hasMany(Project::class); //Tabella indipendente (1)
     }
 }

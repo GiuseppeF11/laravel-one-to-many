@@ -18,9 +18,9 @@ class TypeSeeder extends Seeder
      */
     public function run(): void
     {
-        Schema::withoutForeignKeyConstraints(function () {
-            Type::truncate();
-        });
+        Schema::disableForeignKeyConstraints();
+        Type::truncate();
+        Schema::enableForeignKeyConstraints();
 
         $types = [
             'HTML',
@@ -32,10 +32,10 @@ class TypeSeeder extends Seeder
             'Laravel'
         ];
 
-        foreach ($types as $type) {
+        foreach ($types as $singleType) {
             $type = Type::create([
-                'title' => $type,
-                'slug' => str()->slug($type),
+                'title' => $singleType,
+                'slug' => str()->slug($singleType),
             ]);
         }
     }

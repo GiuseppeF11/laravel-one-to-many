@@ -16,8 +16,12 @@ class Project extends Model
         'type_id',
     ];
 
+    /* 
+        Definisco la relazione 1 a *
+    */
+
     public function type()
     {
-        return $this->belongsTo(Type::class);
+        return $this->belongsTo(Type::class); //Tabella dipendente (*)
     }
 }

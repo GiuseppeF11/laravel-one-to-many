@@ -36,6 +36,22 @@
                 </div>
 
                 <div class="mb-3">
+                    <label for="type_id" class="form-label">Tipo</label>
+                    <select name="type_id" id="type_id" class="form-select">
+                        <option
+                            value=""
+                            {{ old('type_id') == null ? 'selected' : '' }}>
+                            Seleziona un tipo...
+                        </option>
+                        @foreach ($types as $type)
+                            <option value="{{ $type->id }}" {{ old('type_id') == $type->id ? 'selected' : '' }}>
+                                {{ $type->title }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="mb-3">
                     <label for="url" class="form-label">URL</label>
                     <input type="text" class="form-control" id="url" name="url" value="{{ old('url', $project->url) }}"
                         placeholder="Inserisci il link del progetto..." maxlength="1024">

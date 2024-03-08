@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Auth\Project;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
@@ -26,6 +26,7 @@ class UpdateProjectRequest extends FormRequest
             'title'             => 'required|max:100',
             'description'       => 'required|max:1024',
             'url'               => 'required|url',
+            'type_id'           => 'required|exists:types,id',
         ];
     }
 }

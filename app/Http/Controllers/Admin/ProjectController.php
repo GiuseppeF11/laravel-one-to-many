@@ -13,8 +13,8 @@ use App\Models\Type;
 use Illuminate\Support\Str;
 
 // Form Requests
-use App\Http\Requests\StoreProjectRequest;
-use App\Http\Requests\UpdateProjectRequest;
+use App\Http\Requests\Auth\Project\StoreProjectRequest;
+use App\Http\Requests\Auth\Project\UpdateProjectRequest;
 
 class ProjectController extends Controller
 {
@@ -43,13 +43,22 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
-        $validatedData = $request->validated();
+        $projectData = $request->validated();
 
-        $project = Project::create($validatedData);
+        $slug = Str::slug($projectData['title']);
 
-        return redirect()->route('admin.projects.show', ['project' => $project->id]);
+        $project = Project::create([
+            'title' => $projectData['title'],
+            'slug' => $slug,
+            'description' => $projectData['description'],
+            'url' => $projectData['url'],
+            'type_id' => $projectData['type_id'],
+        ]);
+
+        $type = $projectData['type_id'];
+
+        return redirect()->route('admin.projects.show', compact('project', 'type'));
     }
-
     /**
      * Display the specified resource.
      */
@@ -63,7 +72,9 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('admin.projects.edit', compact('project'));
+        $types = Type::all();
+
+        return view('admin.projects.edit', compact('project', 'types'));
     }
 
     /**
@@ -71,11 +82,19 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
-        $validatedData = $request->validated();
+        $projectData = $request->validated();
 
-        $project->update($validatedData);
+        $slug = Str::slug($projectData['title']);
 
-        return redirect()->route('admin.projects.show', ['project' => $project->id]);
+        $project->update([
+            'title' => $projectData['title'],
+            'slug' => $slug,
+            'description' => $projectData['description'],
+            'url' => $projectData['url'],
+            'type_id' => $projectData['type_id'],
+        ]);
+
+        return redirect()->route('admin.projects.show', compact('project'));
     }
 
     /**

@@ -9,9 +9,9 @@ use Illuminate\Http\Request;
 use App\Models\Type;
 
 // Form Requests
-use App\Http\Requests\StoreTypeRequest;
-use App\Http\Requests\UpdateTypeRequest;
-
+/* use App\Http\Requests\Auth\Type\StoreTypeRequest;
+use App\Http\Requests\Auth\Type\UpdateTypeRequest; */
+use GuzzleHttp\Psr7\Request as Psr7Request;
 
 class TypeController extends Controller
 {
@@ -36,11 +36,18 @@ class TypeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreTypeRequest $request)
+    public function store(Request $request)
     {
-        $validatedData = $request->validated();
+        $typeData = $request->validate([
+            'title' => 'required|string|max:32'
+        ]);
 
-        $type = Type::create($validatedData);
+        $slug = str()->slug($typeData['title']);
+
+        $type = Type::create([
+            'title' => $typeData['title'],
+            'slug' => $slug,
+        ]);
 
         return redirect()->route('admin.types.show', ['type' => $type->id]);
     }
@@ -64,11 +71,18 @@ class TypeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTypeRequest $request, Type $type)
+    public function update(Request $request, Type $type)
     {
-        $validatedData = $request->validated();
+        $typeData = $request->validated([
+            'title' => 'required|string|max:32'
+        ]);
 
-        $type->update($validatedData);
+        $slug = str()->slug($typeData['title']);
+
+        $type->update([
+            'title' => $typeData['title'],
+            'slug' => $slug,
+        ]);
 
         return redirect()->route('admin.types.show', ['type' => $type->id]);
     }
